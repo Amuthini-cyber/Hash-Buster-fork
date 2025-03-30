@@ -80,7 +80,14 @@ def send_message(ws, message):
         
 def beta(hashvalue, hashtype):
     url = "wss://md5hashing.net/sockjs/697/etstxji0/websocket"
-    ws = websocket.create_connection(url)
+    try:
+        ws = websocket.create_connection(url)
+        ws.send(hashvalue)
+        result=ws.recv()
+        return result
+    except Exception:
+        return  None
+
     connect_message = r'["{\"msg\":\"connect\",\"version\":\"1\",\"support\":[\"1\",\"pre2\",\"pre1\"]}"]'
     send_message(ws, connect_message)
     

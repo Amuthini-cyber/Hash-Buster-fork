@@ -6,7 +6,7 @@ import os
 import requests
 import argparse
 import concurrent.futures
-import websocket
+from websocket import create_connection
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 parser = argparse.ArgumentParser()
@@ -80,7 +80,7 @@ def send_message(ws, message):
         
 def beta(hashvalue, hashtype):
     url = "wss://md5hashing.net/sockjs/697/etstxji0/websocket"
-    ws = websocket.create_connection(url)
+    ws = create_connection(url)
     connect_message = r'["{\"msg\":\"connect\",\"version\":\"1\",\"support\":[\"1\",\"pre2\",\"pre1\"]}"]'
     send_message(ws, connect_message)
     
